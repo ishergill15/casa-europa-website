@@ -1,0 +1,879 @@
+<title>Casa Europa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+  :root{
+    --cream:#F7F1E4;
+    --cream-2:#EFE6D2;
+    --ink:#2A241C;
+    --ink-soft:#5B5347;
+    --terracotta:#B75B34;
+    --terracotta-deep:#9A4826;
+    --azulejo:#28586E;
+    --azulejo-soft:#3E7690;
+    --gold:#C79A3E;
+    --line:#E0D5BD;
+    --card:#FFFDF8;
+    --surface:var(--cream);
+    --text:var(--ink);
+    --text-soft:var(--ink-soft);
+    --accent:var(--terracotta);
+    --accent-2:var(--azulejo);
+    --shadow: 0 24px 48px -28px rgba(42,36,28,0.35);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --surface:#211D18;
+      --cream-2:#2B251E;
+      --text:#F3EBDA;
+      --text-soft:#C9BCA3;
+      --ink:#F3EBDA;
+      --card:#2A241D;
+      --line:#3D362B;
+      --shadow: 0 24px 48px -24px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --surface:#211D18;
+    --cream-2:#2B251E;
+    --text:#F3EBDA;
+    --text-soft:#C9BCA3;
+    --ink:#F3EBDA;
+    --card:#2A241D;
+    --line:#3D362B;
+    --shadow: 0 24px 48px -24px rgba(0,0,0,0.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface);
+    color:var(--text);
+    font-family:'Work Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+
+  /* photo placeholders — swapped for real photos once supplied */
+  .ph{position:relative; width:100%; height:100%; display:flex; align-items:flex-end; overflow:hidden;}
+  .ph::after{content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,.14) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(255,255,255,.14) 25%, transparent 25%);
+    background-size:34px 34px; mix-blend-mode:overlay; opacity:.6;
+  }
+  .ph-1{background:linear-gradient(135deg, var(--terracotta) 0%, var(--gold) 100%);}
+  .ph-2{background:linear-gradient(135deg, var(--azulejo) 0%, var(--azulejo-soft) 100%);}
+  .ph-3{background:linear-gradient(135deg, var(--gold) 0%, var(--terracotta-deep) 100%);}
+  .ph-4{background:linear-gradient(135deg, var(--azulejo-soft) 0%, var(--terracotta) 100%);}
+  .ph-5{background:linear-gradient(135deg, var(--terracotta-deep) 0%, var(--azulejo) 100%);}
+  .ph-6{background:linear-gradient(135deg, var(--gold) 0%, var(--azulejo-soft) 100%);}
+  .ph-label{position:relative; z-index:1; margin:16px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#FCF4E8; background:rgba(20,17,12,.32); padding:6px 10px; border-radius:2px;}
+  .host-ph{width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--azulejo) 0%, var(--azulejo-soft) 100%); color:#F7F1E4; font-family:'Fraunces',serif; font-size:34px; font-weight:600;}
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; text-wrap:balance; margin:0; font-weight:600; color:var(--text);}
+  a{color:inherit;}
+  .num{font-family:'JetBrains Mono', ui-monospace, monospace;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-2); font-weight:500;
+  }
+
+  /* nav */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:1180px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:600; font-size:20px;}
+  .brand-mark{width:28px;height:28px;flex:none;}
+  nav.links{display:flex; gap:28px; font-size:14px; font-weight:500;}
+  nav.links a{text-decoration:none; color:var(--text-soft); transition:color .15s;}
+  nav.links a:hover{color:var(--accent);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:3px;
+    font-size:14px; font-weight:600; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    font-family:'Work Sans', sans-serif;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--terracotta); color:#FCF4E8;}
+  .btn-primary:hover{background:var(--terracotta-deep);}
+  .btn-outline{border-color:var(--line); color:var(--text); background:transparent;}
+  .btn-outline:hover{border-color:var(--accent-2);}
+  .navcta{display:none;}
+  @media(min-width:760px){.navcta{display:inline-flex;}}
+  @media(max-width:760px){nav.links{display:none;}}
+
+  /* hero */
+  .hero{position:relative; padding:52px 28px 0;}
+  .hero-grid{
+    max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:1.3fr .8fr; gap:14px;
+  }
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+  .hero-media{position:relative; border-radius:4px; overflow:hidden; box-shadow:var(--shadow); min-height:420px;}
+  .hero-media .ph{position:absolute; inset:0;}
+  .hero-side{display:grid; grid-template-rows:1fr 1fr; gap:14px;}
+  .hero-side .hero-media{min-height:203px;}
+  .hero-copy{max-width:1180px; margin:0 auto; padding:34px 0 46px;}
+  .hero-copy h1{font-size:clamp(34px,5vw,56px); line-height:1.02; max-width:14ch;}
+  .hero-sub{margin-top:14px; font-size:18px; color:var(--text-soft); max-width:52ch; line-height:1.5;}
+  .hero-ctas{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+
+  .statbar{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    margin-top:40px;
+  }
+  .statbar div{padding:22px 10px; text-align:center; border-left:1px solid var(--line);}
+  .statbar div:first-child{border-left:none;}
+  .statbar .num{display:block; font-size:26px; color:var(--accent); font-weight:500;}
+  .statbar .lbl{display:block; font-size:12px; letter-spacing:.06em; color:var(--text-soft); margin-top:4px; text-transform:uppercase;}
+  @media(max-width:640px){.statbar{grid-template-columns:repeat(2,1fr);} .statbar div:nth-child(3){border-left:none;}}
+
+  section{padding:76px 0;}
+  .section-head{max-width:640px; margin-bottom:40px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px); margin-top:10px;}
+  .section-head p{color:var(--text-soft); margin-top:12px; font-size:16px; line-height:1.6;}
+
+  /* tile divider (azulejo motif) */
+  .tilebreak{height:26px; width:100%;
+    background-image:
+      linear-gradient(45deg, var(--azulejo-soft) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--azulejo-soft) 25%, transparent 25%);
+    background-size:26px 26px; background-position:0 0;
+    opacity:.55;
+  }
+
+  /* overview */
+  .overview-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start;}
+  @media(max-width:860px){.overview-grid{grid-template-columns:1fr;}}
+  .overview-grid p{font-size:17px; line-height:1.75; color:var(--text-soft);}
+  .overview-grid p + p{margin-top:16px;}
+  .quickfacts{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:26px; box-shadow:var(--shadow);}
+  .quickfacts h3{font-size:15px; text-transform:uppercase; letter-spacing:.08em; font-family:'Work Sans'; font-weight:600; color:var(--accent-2);}
+  .qf-row{display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid var(--line); font-size:15px;}
+  .qf-row:first-of-type{border-top:none; margin-top:16px;}
+  .qf-row span:first-child{color:var(--text-soft);}
+  .qf-row span:last-child{font-weight:600;}
+
+  /* gallery */
+  .gal{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:10px;}
+  .gal a{display:block; border-radius:4px; overflow:hidden; position:relative;}
+  .gal .ph{transition:transform .4s ease;}
+  .gal a:hover .ph{transform:scale(1.05);}
+  .gal .g1{grid-column:span 2; grid-row:span 2;}
+  .gal .g2{grid-column:span 2;}
+  @media(max-width:760px){.gal{grid-template-columns:repeat(2,1fr); grid-auto-rows:130px;} .gal .g1{grid-column:span 2; grid-row:span 2;} .gal .g2{grid-column:span 2;}}
+
+  .roomlabel{position:absolute; left:10px; bottom:10px; background:rgba(20,17,12,.62); color:#FCF4E8; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:5px 9px; border-radius:2px; font-family:'JetBrains Mono',monospace;}
+
+  /* amenities */
+  .amen-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  @media(max-width:860px){.amen-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.amen-grid{grid-template-columns:1fr;}}
+  .amen-cat{background:var(--card); padding:26px 24px;}
+  .amen-cat h4{font-family:'Work Sans'; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:600; margin-bottom:14px;}
+  .amen-cat ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .amen-cat li{font-size:14.5px; color:var(--text-soft); padding-left:18px; position:relative; line-height:1.4;}
+  .amen-cat li::before{content:''; position:absolute; left:0; top:7px; width:6px; height:6px; background:var(--accent-2); border-radius:50%;}
+
+  /* location */
+  .loc-wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px;}
+  @media(max-width:860px){.loc-wrap{grid-template-columns:1fr;}}
+  .distpill{display:flex; align-items:center; gap:14px; padding:14px 0; border-top:1px solid var(--line);}
+  .distpill:first-of-type{border-top:none;}
+  .distpill .num{font-size:20px; color:var(--accent-2); min-width:56px;}
+  .loc-cats{display:grid; gap:22px;}
+  .loc-cat h4{font-size:13px; text-transform:uppercase; letter-spacing:.07em; color:var(--accent-2); font-weight:600; margin-bottom:8px; font-family:'Work Sans';}
+  .loc-cat p{color:var(--text-soft); font-size:15px; line-height:1.6; margin:0;}
+
+  /* host */
+  .host-card{display:grid; grid-template-columns:auto 1fr auto; gap:32px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:34px; box-shadow:var(--shadow);}
+  @media(max-width:760px){.host-card{grid-template-columns:1fr; text-align:center;}}
+  .host-avatar{width:84px; height:84px; border-radius:50%; overflow:hidden; border:3px solid var(--cream-2); margin:0 auto;}
+  .host-info h3{font-size:22px;}
+  .host-info p{color:var(--text-soft); margin-top:6px; font-size:14.5px;}
+  .ratingbars{display:grid; gap:8px; min-width:220px;}
+  .rbar-row{display:grid; grid-template-columns:90px 1fr 30px; align-items:center; gap:10px; font-size:12.5px; color:var(--text-soft);}
+  .rbar-track{height:5px; background:var(--cream-2); border-radius:3px; overflow:hidden;}
+  .rbar-fill{height:100%; background:var(--accent);}
+
+  /* rules */
+  .rules-list{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(max-width:760px){.rules-list{grid-template-columns:1fr;}}
+  .rule{border-top:2px solid var(--accent-2); padding-top:14px;}
+  .rule h4{font-size:15px; font-weight:600; margin-bottom:6px; font-family:'Work Sans';}
+  .rule p{font-size:14px; color:var(--text-soft); line-height:1.5; margin:0;}
+
+  /* booking */
+  .book-panel{background:var(--ink); color:#F3EBDA; border-radius:8px; padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media(max-width:860px){.book-panel{grid-template-columns:1fr; padding:32px;}}
+  .book-panel h2{color:#FCF4E8;}
+  .book-panel p{color:#CBBFA6; font-size:15.5px; line-height:1.6; margin-top:12px;}
+  .book-panel .btn-primary{margin-top:22px;}
+  .book-links{display:flex; flex-direction:column; gap:10px; margin-top:18px;}
+  .book-links a{color:#F0E4CC; font-size:14px; text-decoration:underline; text-underline-offset:3px; opacity:.9;}
+
+  form.enquiry{display:grid; gap:12px;}
+  form.enquiry .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  form.enquiry label{font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:#B7A98C; font-family:'JetBrains Mono',monospace;}
+  form.enquiry input, form.enquiry textarea{
+    width:100%; background:#2E2820; border:1px solid #46402F; color:#F3EBDA;
+    border-radius:3px; padding:11px 12px; font-size:14.5px; font-family:'Work Sans';
+  }
+  form.enquiry input:focus, form.enquiry textarea:focus{outline:1.5px solid var(--terracotta); border-color:var(--terracotta);}
+  form.enquiry textarea{resize:vertical; min-height:70px;}
+  .field{display:grid; gap:6px;}
+  .form-msg{font-size:13.5px; margin-top:8px; min-height:18px;}
+  .form-msg.ok{color:#9AC49B;}
+  .form-msg.err{color:#E39A82;}
+
+  footer{border-top:1px solid var(--line); padding:36px 0; margin-top:20px;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--text-soft);}
+  .foot-row a{text-decoration:none; color:var(--text-soft);}
+
+  /* rates */
+  .rate-table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:6px; overflow:hidden; box-shadow:var(--shadow);}
+  .rate-table th, .rate-table td{text-align:left; padding:16px 20px; font-size:15px;}
+  .rate-table thead th{background:var(--cream-2); font-family:'Work Sans'; font-size:12px; text-transform:uppercase; letter-spacing:.07em; color:var(--accent-2); font-weight:600; border-bottom:1px solid var(--line);}
+  .rate-table tbody tr + tr{border-top:1px solid var(--line);}
+  .rate-table td.price{font-family:'JetBrains Mono',monospace; font-weight:500; color:var(--accent);}
+  .rate-table td.period{font-weight:600;}
+  .rate-note{margin-top:18px; font-size:14px; color:var(--text-soft); line-height:1.6; max-width:70ch;}
+
+  /* map */
+  .map-embed{border-radius:6px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); height:100%; min-height:320px;}
+  .map-embed iframe{width:100%; height:100%; min-height:320px; border:0; display:block;}
+
+  /* testimonials */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(max-width:860px){.testi-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:620px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:22px; display:flex; flex-direction:column; gap:12px;}
+  .testi-head{display:flex; align-items:center; gap:12px;}
+  .testi-avatar{width:46px; height:46px; border-radius:50%; overflow:hidden; flex:none; border:2px solid var(--cream-2);}
+  .testi-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+  .testi-avatar.ph-init{display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--azulejo) 0%, var(--azulejo-soft) 100%); color:#F7F1E4; font-family:'Fraunces',serif; font-weight:600; font-size:17px;}
+  .testi-who{display:flex; flex-direction:column; gap:2px;}
+  .testi-name{font-size:14px; font-weight:600; color:var(--text);}
+  .testi-stay{font-size:11.5px; color:var(--text-soft); font-family:'JetBrains Mono',monospace;}
+  .testi-stars{color:var(--gold); font-size:13px; letter-spacing:2px;}
+  .testi-quote{font-size:14.5px; line-height:1.55; color:var(--text-soft);}
+
+  ::selection{background:var(--gold); color:#2A241C;}
+</style>
+
+<header class="nav">
+  <div class="navrow">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="4" fill="#B75B34"/><path d="M6 20V11L14 6L22 11V20H16V15H12V20H6Z" fill="#F7F1E4"/></svg>
+      Casa Europa
+    </div>
+    <nav class="links">
+      <a href="#overview">Overview</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#rates">Rates</a>
+      <a href="#location">Location</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#book">Book</a>
+    </nav>
+    <a class="btn btn-primary navcta" href="#book">Check availability</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-grid">
+    <div class="hero-media">
+      <div class="ph ph-1"><span class="ph-label">Rooftop pool · Casa Europa</span></div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-media"><div class="ph ph-2"><span class="ph-label">Villa view</span></div></div>
+      <div class="hero-media"><div class="ph ph-3"><span class="ph-label">Interior</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap hero-copy">
+  <span class="eyebrow">Calangute · North Goa</span>
+  <h1>A six-bedroom rooftop-pool villa, two minutes from Calangute beach.</h1>
+  <p class="hero-sub">Newly renovated, self-catered and staffed on request &mdash; Casa Europa sleeps up to fourteen across six air‑conditioned en‑suite bedrooms, built around a 21&nbsp;m&sup2; rooftop pool with sunbeds and alfresco dining.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="#book">Check availability</a>
+    <a class="btn btn-outline" href="#gallery">View the villa</a>
+  </div>
+
+  <div class="statbar">
+    <div><span class="num">6</span><span class="lbl">Bedrooms</span></div>
+    <div><span class="num">7</span><span class="lbl">Bathrooms</span></div>
+    <div><span class="num">14</span><span class="lbl">Sleeps</span></div>
+    <div><span class="num">4.68</span><span class="lbl">Rating · 120 reviews</span></div>
+  </div>
+</div>
+
+<section id="overview">
+  <div class="wrap overview-grid">
+    <div>
+      <span class="eyebrow">Overview</span>
+      <h2 style="margin-top:10px;">A villa built for a full house, not a couple's getaway</h2>
+      <p>Casa Europa is a newly renovated beach villa a two‑minute walk from Calangute beach and five minutes from Baga. The rooftop swimming pool &mdash; 7 by 3 metres, under three feet deep &mdash; is exclusively for guests, ringed by sunbeds and an alfresco dining area that catches the evening light.</p>
+      <p>Downstairs, a self‑catering European kitchen and indoor and outdoor lounges give the ground floor room to spread out; upstairs, all six bedrooms are air‑conditioned and en‑suite, each with a smart‑screen TV and its own balcony. Self check‑in is by keypad, so arrival doesn't depend on anyone's schedule but yours.</p>
+      <p>It's a house that works equally well for a multi‑family holiday, a wedding party, or a group who want their own kitchen, their own pool, and Calangute on foot.</p>
+    </div>
+    <div class="quickfacts">
+      <h3>Quick facts</h3>
+      <div class="qf-row" style="border-top:none; margin-top:16px;"><span>Bedrooms / beds</span><span>6 / 6</span></div>
+      <div class="qf-row"><span>Bathrooms</span><span>7</span></div>
+      <div class="qf-row"><span>Max guests</span><span>14</span></div>
+      <div class="qf-row"><span>Pool</span><span>Rooftop, 7&times;3m</span></div>
+      <div class="qf-row"><span>Check‑in</span><span>Self, via keypad</span></div>
+      <div class="qf-row"><span>To Calangute beach</span><span>~2 min walk</span></div>
+      <div class="qf-row"><span>To Baga beach</span><span>~5 min walk</span></div>
+      <div class="qf-row"><span>Registration no.</span><span>G667715</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="tilebreak"></div></div>
+
+<section id="rates">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Rates</span>
+      <h2>Seasonal &amp; occupancy pricing</h2>
+      <p>Base rate covers up to 6 adults. Rates rise with the season and with guest count beyond that.</p>
+    </div>
+    <table class="rate-table">
+      <thead>
+        <tr><th>Period</th><th>Base rate (up to 6 adults)</th><th>Each additional guest</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="period">Standard season</td><td class="price">&#8377;15,000&ndash;&#8377;50,000 / night</td><td class="price">+&#8377;1,200 / night</td></tr>
+        <tr><td class="period">Christmas &amp; New Year<br><span style="font-weight:400; color:var(--text-soft); font-size:13px;">24&ndash;31 December</span></td><td class="price">&#8377;40,500 / night</td><td class="price">+&#8377;1,200 / night</td></tr>
+      </tbody>
+    </table>
+    <p class="rate-note">Standard-season rates scale within the range shown depending on dates and demand &mdash; enquire for an exact quote. All rates are tax-inclusive. Every guest staying at the villa must be registered, in line with local and national reporting requirements, which is why pricing scales with headcount rather than staying flat per booking.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="tilebreak"></div></div>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Gallery</span>
+      <h2>More of the villa</h2>
+      <p>A first set of photos to work with &mdash; send through more and this gallery grows with them.</p>
+    </div>
+    <div class="gal" style="grid-auto-rows:260px;">
+      <a class="g2" href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-4"><span class="ph-label">Alfresco dining</span></div></a>
+      <a class="g2" href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-5"><span class="ph-label">Lounge</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Bedrooms</span>
+      <h2>Six en&#8209;suite rooms, each with a balcony</h2>
+    </div>
+    <div class="gal" style="grid-auto-rows:180px;">
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-1"><span class="ph-label">Bedroom 1</span></div></a>
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-2"><span class="ph-label">Bedroom 2</span></div></a>
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-3"><span class="ph-label">Bedroom 3</span></div></a>
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-4"><span class="ph-label">Bedroom 4</span></div></a>
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-5"><span class="ph-label">Bedroom 5</span></div></a>
+      <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener"><div class="ph ph-6"><span class="ph-label">Bedroom 6</span></div></a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="tilebreak"></div></div>
+
+<section id="amenities">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Amenities</span>
+      <h2>Everything the house comes with</h2>
+    </div>
+    <div class="amen-grid">
+      <div class="amen-cat">
+        <h4>Pool &amp; outdoor</h4>
+        <ul>
+          <li>Rooftop pool, 21m&sup2;, under 3ft deep</li>
+          <li>Sunbeds &amp; alfresco dining</li>
+          <li>Indoor and outdoor lounge areas</li>
+          <li>Bar and music system</li>
+          <li>Shared / private beach access</li>
+        </ul>
+      </div>
+      <div class="amen-cat">
+        <h4>Kitchen &amp; dining</h4>
+        <ul>
+          <li>Full European-style kitchen</li>
+          <li>Microwave, kettle, toaster</li>
+          <li>RO water purifier</li>
+          <li>Breakfast on request &mdash; &#8377;150/person, 8:30&ndash;11:00am</li>
+          <li>In‑house catering &amp; chef service (extra charge)</li>
+        </ul>
+      </div>
+      <div class="amen-cat">
+        <h4>Comfort &amp; connectivity</h4>
+        <ul>
+          <li>Air conditioning in all bedrooms</li>
+          <li>Smart‑screen TV in every room</li>
+          <li>Fast wifi &mdash; 362 Mbps</li>
+          <li>Dedicated workspace</li>
+          <li>En‑suite bathroom per bedroom, private balconies</li>
+        </ul>
+      </div>
+      <div class="amen-cat">
+        <h4>Services</h4>
+        <ul>
+          <li>Self check‑in via keypad</li>
+          <li>Laundry service</li>
+          <li>Airport pickups (extra charge)</li>
+          <li>Car / bike hire (extra charge)</li>
+          <li>Water sports access nearby</li>
+        </ul>
+      </div>
+      <div class="amen-cat">
+        <h4>Access</h4>
+        <ul>
+          <li>Disabled parking spot</li>
+          <li>Lit path to entrance</li>
+          <li>Accessible entrance</li>
+        </ul>
+      </div>
+      <div class="amen-cat">
+        <h4>House rules snapshot</h4>
+        <ul>
+          <li>Smoking outdoors only</li>
+          <li>Pool parties end by 11pm</li>
+          <li>Please keep noise down after 11pm</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="wrap loc-wrap">
+    <div>
+      <span class="eyebrow">Location</span>
+      <h2 style="margin-top:10px;">Calangute, on foot</h2>
+      <div style="margin-top:24px;">
+        <div class="distpill"><span class="num">2′</span><span>walk to Calangute beach</span></div>
+        <div class="distpill"><span class="num">5′</span><span>walk to Baga beach</span></div>
+      </div>
+      <div class="map-embed" style="margin-top:26px;">
+        <iframe src="https://www.google.com/maps?q=Casa+Europa,+Calangute,+Goa,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Casa Europa location map"></iframe>
+      </div>
+    </div>
+    <div class="loc-cats">
+      <p style="color:var(--text-soft); font-size:16px; line-height:1.7; margin-bottom:6px;">A stretch of coast for both "party lovers and lovers of peace" &mdash; beach on one side, North Goa's restaurant and nightlife strip on the other.</p>
+      <div class="loc-cat">
+        <h4>On the water</h4>
+        <p>Parasailing, paragliding, boating, dolphin‑spotting trips and scuba diving are all arranged locally.</p>
+      </div>
+      <div class="loc-cat">
+        <h4>Eating out</h4>
+        <p>Fish &amp; chips shacks, Italian, French, South Indian, North Indian and Goan kitchens, all within easy reach.</p>
+      </div>
+      <div class="loc-cat">
+        <h4>After dark</h4>
+        <p>TITO's, LPK and Club Cubana anchor the nightlife strip nearby.</p>
+      </div>
+      <div class="loc-cat">
+        <h4>Practicalities</h4>
+        <p>Pharmacies, medical facilities, hospitals and shops are all close by.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="tilebreak"></div></div>
+
+<section id="host">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Your host</span>
+      <h2>Hosted by Inderpal</h2>
+    </div>
+    <div class="host-card">
+      <div class="host-avatar"><div class="host-ph">I</div></div>
+      <div class="host-info">
+        <h3>Inderpal</h3>
+        <p>6 years hosting on Airbnb &middot; 100% response rate, usually within a few hours &middot; 4.68 &#9733; average across 120 reviews</p>
+      </div>
+      <div class="ratingbars">
+        <div class="rbar-row"><span>Cleanliness</span><div class="rbar-track"><div class="rbar-fill" style="width:92%;"></div></div><span class="num">4.6</span></div>
+        <div class="rbar-row"><span>Communication</span><div class="rbar-track"><div class="rbar-fill" style="width:98%;"></div></div><span class="num">4.9</span></div>
+        <div class="rbar-row"><span>Check‑in</span><div class="rbar-track"><div class="rbar-fill" style="width:96%;"></div></div><span class="num">4.8</span></div>
+        <div class="rbar-row"><span>Location</span><div class="rbar-track"><div class="rbar-fill" style="width:92%;"></div></div><span class="num">4.6</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Guest reviews</span>
+      <h2>What guests say</h2>
+      <p>Every review sent over, all from Airbnb &mdash; wording lightly tidied for length, photos pulled from guest profile pictures where Airbnb showed one.</p>
+    </div>
+    <div class="testi-grid">
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/anshul.png" alt="Anshul"></div>
+          <div class="testi-who"><span class="testi-name">Anshul</span><span class="testi-stay">16&ndash;17 Jan 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Inderpal's house was the highlight of our vacation. It's a huge property with huge rooms and opens into a swimming pool. We had a great time swimming with our 2 year old. Complete privacy, the caretaker was good. A big thank you to Inderpal for his hospitality and warmth."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/alapan.png" alt="Alapan"></div>
+          <div class="testi-who"><span class="testi-name">Alapan</span><span class="testi-stay">11&ndash;14 Apr</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"We had a very pleasant stay."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/brijesh.png" alt="Brijesh"></div>
+          <div class="testi-who"><span class="testi-name">Brijesh</span><span class="testi-stay">30 Nov&ndash;2 Dec 2024</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Thanks for hosting us, had a good time!"</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/guest-april.png" alt="Guest"></div>
+          <div class="testi-who"><span class="testi-name">Guest, family stay</span><span class="testi-stay">1&ndash;3 Apr</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Casa Europa is a great property near Calangute beach, can accommodate up to 14 members. The big kitchen was an add-on for us with all necessary utensils. We had an issue with the AC and the host responded the very next day. Looking forward to staying again with family."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/nadheson.png" alt="Nadheson"></div>
+          <div class="testi-who"><span class="testi-name">Nadheson</span><span class="testi-stay">4&ndash;8 Sep 2025</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"It was an amazing stay, everything was easy to access. We wanted to hire mopeds and that was delivered straight to us. Literally a 5 min walk from the main road. Sound system within the house was good."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">8</div>
+          <div class="testi-who"><span class="testi-name">Group of 8 friends</span><span class="testi-stay">7&ndash;10 Dec 2024</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"We were 8 friends and had a very comfortable and enjoyable stay. All daily needs, medicines and restaurants are in very easy reach. Breakfast provided by the staff was excellent. Rooms were meticulously cleaned every day. Highly recommended."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/friendly-groves.png" alt="Friendly Groves"></div>
+          <div class="testi-who"><span class="testi-name">Friendly Groves</span><span class="testi-stay">7&ndash;9 Aug</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Had a good vacation break with friends. The villa is awesome, thanks Inder for hosting us."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/sharan.png" alt="Sharan"></div>
+          <div class="testi-who"><span class="testi-name">Sharan</span><span class="testi-stay">12&ndash;15 Jan 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"It's the best place to stay, very near the beach. Best thing is you can place a food order of your choice with prior notice &mdash; home-style food on vacation makes the trip more fun."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">F</div>
+          <div class="testi-who"><span class="testi-name">5-night guest</span><span class="testi-stay">20&ndash;25 Feb 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"The chef Amit is amazing with cooking, veg and non-veg, and he even did a BBQ for us. There are 5 massive LED TVs with wifi for Netflix and Prime. The location is so good &mdash; 2 minutes to the beach, and we could walk to Tito's nightclub. A true home away from home."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/sagar.png" alt="Sagar"></div>
+          <div class="testi-who"><span class="testi-name">Sagar</span><span class="testi-stay">30 Jan&ndash;4 Feb 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Had an amazing time at the property. Amit is the man of the show &mdash; he made sure we had everything round the clock. Rooms were all good, cleaned, and the washrooms were excellent."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/nikhil.png" alt="Nikhil"></div>
+          <div class="testi-who"><span class="testi-name">Nikhil</span><span class="testi-stay">19&ndash;21 Feb</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Very well maintained property."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/abhay.png" alt="Abhay"></div>
+          <div class="testi-who"><span class="testi-name">Abhay</span><span class="testi-stay">31 Oct&ndash;2 Nov 2025</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Great stay! Peaceful locality and a very responsive host."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">B</div>
+          <div class="testi-who"><span class="testi-name">Biswa</span><span class="testi-stay">9&ndash;11 Jan</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Great location, very close to Calangute beach. Home design is great, all amenities available including karaoke and kitchen utensils. We enjoyed a lot during our stay."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">G</div>
+          <div class="testi-who"><span class="testi-name">Guest</span><span class="testi-stay">7&ndash;9 Nov 2025</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"I had an amazing experience during my stay. The rooms were clean, spacious, and well-maintained. The staff was extremely courteous. I would definitely love to stay here again."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/briana.png" alt="Briana"></div>
+          <div class="testi-who"><span class="testi-name">Briana</span><span class="testi-stay">13&ndash;18 Dec 2024</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Casa Europa was a great stay in North Goa. Inderpal was very responsive and his local agent was really helpful with finding local food and handling any small issues. Great stay for a big group!"</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/ankit.png" alt="Ankit"></div>
+          <div class="testi-who"><span class="testi-name">Ankit</span><span class="testi-stay">23&ndash;26 Jan 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"It is really close to the beach, Tito's club and other tourist attractions. The swimming pool location and the pool itself are both amazing."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/avinash.png" alt="Avinash"></div>
+          <div class="testi-who"><span class="testi-name">Avinash</span><span class="testi-stay">1&ndash;3 Oct</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Had a very beautiful stay, exactly as shown in the pictures. All rooms are equipped with AC and TV, and the living room comfortably fits a party of 6&ndash;7. A perfect home near the beach."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">S</div>
+          <div class="testi-who"><span class="testi-name">Suraj</span><span class="testi-stay">5&ndash;7 Jan 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Must visit."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/amol.png" alt="Amol"></div>
+          <div class="testi-who"><span class="testi-name">Amol</span><span class="testi-stay">27&ndash;29 Jun</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Romila was awesome help &mdash; thanks Inderpal ji, let's hope we catch up again."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/ruben.png" alt="Ruben"></div>
+          <div class="testi-who"><span class="testi-name">Ruben</span><span class="testi-stay">16&ndash;18 Jan</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"The house is very nice, all rooms with a private bathroom, very close to the beach and restaurants. Inderpal was very attentive to everything and his team took care of us at all times."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/riaz.png" alt="Riaz"></div>
+          <div class="testi-who"><span class="testi-name">Riaz</span><span class="testi-stay">13&ndash;16 Feb 2025</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"We were a group of friends having a get-together for 4 days. Amazing accommodation where every requirement was looked after. Amit, the caretaker, cooked us piping hot, excellent delicacies. In summary, an excellent stay at Casa Europa."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/julius.png" alt="Julius"></div>
+          <div class="testi-who"><span class="testi-name">Julius</span><span class="testi-stay">6&ndash;10 Feb</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"We had a very nice stay. The location is great, the rooms are nice, and the downstairs area was a good space to hang out. The beach is close, yet the street was pleasantly quiet. Overall a very pleasant stay."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar"><img src="avatars/namit.png" alt="Namit"></div>
+          <div class="testi-who"><span class="testi-name">Namit</span><span class="testi-stay">10&ndash;13 Feb 2021</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"Overall the stay was excellent. Amit, the caretaker, was a superhost and cooks delicious food. Recommended for groups and families &mdash; walking distance from the beach."</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar ph-init">M</div>
+          <div class="testi-who"><span class="testi-name">Mrunmai</span><span class="testi-stay">24&ndash;26 Jan</span></div>
+        </div>
+        <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="testi-quote">"It was a great experience and the host was very helpful as well."</p>
+      </div>
+
+    </div>
+    <p class="rate-note">All 24 reviews sent over are here, transcribed from the screenshots &mdash; six guests didn't have a profile photo on Airbnb so they're shown with an initial instead. Let me know if any wording needs a correction.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="tilebreak"></div></div>
+
+<section id="book">
+  <div class="wrap">
+    <div class="book-panel">
+      <div>
+        <span class="eyebrow" style="color:var(--gold);">Availability &amp; booking</span>
+        <h2 style="margin-top:10px;">Two ways to book Casa Europa</h2>
+        <p>Live dates and instant booking run through the Airbnb calendar below. Prefer to book direct, or have questions first &mdash; send an enquiry and Inderpal will reply directly.</p>
+        <a class="btn btn-primary" href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener">Check dates on Airbnb &rarr;</a>
+        <div class="book-links">
+          <a href="https://www.airbnb.co.uk/rooms/47109310" target="_blank" rel="noopener">airbnb.co.uk/rooms/47109310</a>
+        </div>
+      </div>
+      <form class="enquiry" id="enquiryForm" name="enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="enquiry">
+        <p style="position:absolute; left:-9999px;"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+        <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" required></div>
+        <div class="row2">
+          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" required></div>
+          <div class="field"><label for="q-phone">Phone (optional)</label><input id="q-phone" name="phone"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="q-dates">Dates</label><input id="q-dates" name="dates" placeholder="e.g. 12–19 Dec 2026"></div>
+          <div class="field"><label for="q-guests">Guests</label><input id="q-guests" name="guests" type="number" min="1" max="14"></div>
+        </div>
+        <div class="field"><label for="q-msg">Message</label><textarea id="q-msg" name="message" placeholder="Anything Inderpal should know"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="justify-self:start;">Send enquiry</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>&copy; Casa Europa, Calangute, Goa &middot; Registration G667715</span>
+    <span>Enquiries via the form above</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Hosted on Netlify: this form has data-netlify="true" and a matching
+  // form-name hidden field, so Netlify's build bot detects it automatically
+  // and captures submissions — no backend code needed. Netlify emails new
+  // submissions to the site owner's account email by default; add/change
+  // notification recipients under Site settings -> Forms -> Notifications
+  // in the Netlify dashboard. On any OTHER host (not Netlify), this falls
+  // back to opening a pre-filled email instead, so the form still works.
+  var OWNER_EMAIL = 'casaeuropagoa@gmail.com';
+  var onNetlify = /netlify\.app$|\.netlify\.com$/.test(location.hostname) || location.hostname === 'casaeuropa.in';
+
+  var form = document.getElementById('enquiryForm');
+  var msg = document.getElementById('formMsg');
+
+  function encodeForm(data){
+    return Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+    }).join('&');
+  }
+
+  form.addEventListener('submit', function(e){
+    var data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      dates: form.dates.value.trim(),
+      guests: form.guests.value.trim(),
+      message: form.message.value.trim()
+    };
+    if(!data.name || !data.email){
+      e.preventDefault();
+      msg.textContent = 'Please add your name and email.';
+      msg.className = 'form-msg err';
+      return;
+    }
+
+    if(onNetlify){
+      // Let Netlify capture it silently via AJAX — no page reload, no email app.
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: encodeForm(Object.assign({'form-name': 'enquiry'}, data))
+      }).then(function(){
+        msg.textContent = 'Thanks — your enquiry has been sent. Inderpal will get back to you directly.';
+        msg.className = 'form-msg ok';
+        form.reset();
+      }).catch(function(){
+        msg.textContent = 'Something went wrong sending that — please try the Airbnb link above, or email directly.';
+        msg.className = 'form-msg err';
+      }).finally(function(){
+        btn.disabled = false; btn.textContent = 'Send enquiry';
+      });
+    } else {
+      // Not on Netlify (e.g. previewing locally, or hosted elsewhere) —
+      // fall back to a pre-filled email so the form still does something useful.
+      e.preventDefault();
+      var subject = 'Casa Europa enquiry — ' + data.name + (data.dates ? ' (' + data.dates + ')' : '');
+      var bodyLines = [
+        'Name: ' + data.name,
+        'Email: ' + data.email,
+        'Phone: ' + (data.phone || '—'),
+        'Dates: ' + (data.dates || '—'),
+        'Guests: ' + (data.guests || '—'),
+        '',
+        'Message:',
+        data.message || '—'
+      ];
+      var mailto = 'mailto:' + encodeURIComponent(OWNER_EMAIL) +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(bodyLines.join('\n'));
+      window.location.href = mailto;
+      msg.textContent = 'Opening your email app with the enquiry filled in — just hit send.';
+      msg.className = 'form-msg ok';
+    }
+  });
+})();
+</script>
